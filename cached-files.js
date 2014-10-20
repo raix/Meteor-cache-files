@@ -46,6 +46,11 @@ _filesInCache.find().observe({
   // file into the cache.
 });
 
+// Make sure quotas are not exeeded
+Meteor.startup(function() {
+  CachedFile.checkQuotas();
+});
+
 var parseFile = function(fileUrl) {
   // Split up the url
   var urlParts = fileUrl.split('/');
