@@ -208,7 +208,7 @@ CachedFile.checkQuotas = function(importantFileId) {
   var importantFile = _filesInCache.findOne(importantFileId);
 
   // Add the important file as top
-  cachedFilesArray.unshift(importantFile);
+  if (importantFile) cachedFilesArray.unshift(importantFile);
 
   // Quotas
   var countFiles = 0;
