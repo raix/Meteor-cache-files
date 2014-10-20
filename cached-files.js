@@ -193,7 +193,6 @@ CachedFile.checkQuotas = function(importantFileId) {
   // 2. Iterate throug and test quotas
   // 3. Remove files if quota exeeded
   // Note: the latest file should not be uncached...
-
   var cachedFilesArray = _filesInCache.find({
     $and: [
       { _id: { $ne: importantFileId } },
@@ -223,6 +222,7 @@ CachedFile.checkQuotas = function(importantFileId) {
     totalSize -= file.size;
     filesToRemove[file.url] = file._id;
   };
+
 
   _.each(cachedFilesArray, function(file) {
     countFiles++;
