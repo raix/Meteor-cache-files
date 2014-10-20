@@ -230,20 +230,20 @@ CachedFile.checkQuotas = function(importantFileId) {
     var ageInDays = Math.round((+new Date() - file.updatedAt) / 86400000); //  1000 * 60 * 60 * 24
 
     // Make sure size limit is not exeeted
-    if (quotas.size && totalSize > quotas.size) {
+    if (_quotas.size && totalSize > _quotas.size) {
       // Remove this file from cache...
       exeededRemoveFile(file);
     }
 
     // Make sure file count is not exeeded
-    if (quotas.limit && countFiles > quotas.limit) {
+    if (_quotas.limit && countFiles > _quotas.limit) {
       // Remove this file from cache...
       exeededRemoveFile(file);
     }
 
 
     // Make sure file age is not exeeded
-    if (quotas.age &&  ageInDays > quotas.age) {
+    if (_quotas.age &&  ageInDays > _quotas.age) {
       // Remove this file from cache...
       exeededRemoveFile(file);
     }
