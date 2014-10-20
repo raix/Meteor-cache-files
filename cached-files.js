@@ -170,17 +170,16 @@ var sortByWeight = function(a, b) {
   // a.updatedAt  Time since last activity
   // a.count      Count of times its been used
   // a.size       Size of data
-
   // Weight
-  var weightA = weight.age * (a.createdAt < b.createdAt) +      // oldest win
-                weight.lastUsed * (a.updatedAt > b.updatedAt) + // newest win
-                weight.count * (a.count > b.count) +            // largest win
-                weight.size * (a.size > b.size);                // largest win
+  var weightA = _weight.age * (a.createdAt > b.createdAt) +
+                _weight.lastUsed * (a.updatedAt > b.updatedAt) +
+                _weight.count * (a.count > b.count) +
+                _weight.size * (a.size > b.size);
 
-  var weightB = weight.age * (b.createdAt < a.createdAt) +
-                weight.lastUsed * (b.updatedAt > a.updatedAt) +
-                weight.count * (b.count > a.count) +
-                weight.size * (b.size > a.size);
+  var weightB = _weight.age * (b.createdAt > a.createdAt) +
+                _weight.lastUsed * (b.updatedAt > a.updatedAt) +
+                _weight.count * (b.count > a.count) +
+                _weight.size * (b.size > a.size);
 
   if (weightA > weightB) return -1; // a is less
 
