@@ -10,8 +10,8 @@ var _quotas = {
 };
 
 var _weight = {
-  updatedAt: 1,   // greater than is good
-  createdAt: -1,  // greater than is bad
+  lastUsed: 1,    // greater than is good
+  age: -1,        // greater than is bad
   count: 1,       // greater than is good
   size: 1,        // greater than is good
 };
