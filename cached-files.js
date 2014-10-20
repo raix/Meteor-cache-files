@@ -299,6 +299,9 @@ CachedFile.load = function(fileUrl) {
     file = _filesInCache.findOne({ url: fileUrl });
   }
 
+  // Set loading...
+  _filesInCache.update({ url: fileUrl }, { $set: { loading: true } });
+
   if (file) CachedFile.downloadFile(file.name, fileUrl, function(err, fileEntry, metadata) {
     if (err) {
 
