@@ -1,0 +1,2 @@
+// The scope
+CachedFile = {};
