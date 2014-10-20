@@ -40,7 +40,7 @@ _filesInCache.find().observe({
     // User just changed a file
     // We check to see if the cached flag has changed - if new is cached we
     // Want to check quotas...
-    if (newDoc.cached && newDoc.cached !== oldDoc.cached) CachedFile.checkQuotas(newDoc._id);
+    if (newDoc.cached && !oldDoc.cached) CachedFile.checkQuotas(newDoc._id);
   }
   // XXX: We could monitor removed or uncached to see if we could load another
   // file into the cache.
