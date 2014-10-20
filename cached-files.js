@@ -250,6 +250,11 @@ CachedFile.checkQuotas = function(importantFileId) {
 
   });
 
+  // Remove the exeeding files from cache...
+  _.each(filesToRemove, function(id, url) {
+    CachedFile.remove(id);
+  });
+
 };
 
 // Add file to cache
