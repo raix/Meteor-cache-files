@@ -286,7 +286,11 @@ CachedFile.add = function(fileUrl) {
 };
 
 // Add file to cache
-CachedFile.load = function(fileUrl) {
+CachedFile.load = function(fileUrl, callback) {
+  if (!fileUrl) {
+    throw new Error('fileUrl arg is required');
+  }
+
   // Check if the file is already found
   var file = _filesInCache.findOne({ url: fileUrl });
 
@@ -297,12 +301,16 @@ CachedFile.load = function(fileUrl) {
 
     // Set the file
     file = _filesInCache.findOne({ url: fileUrl });
+
+    if (!file) {
+      throw new Error('load error');
+    }
   }
 
   // Set loading...
   _filesInCache.update({ url: fileUrl }, { $set: { loading: true } });
 
-  if (file) CachedFile.downloadFile(file.name, fileUrl, function(err, fileEntry, metadata) {
+  CachedFile.downloadFile(file.name, fileUrl, function(err, fileEntry, metadata) {
     if (err) {
 
       _filesInCache.update({ url: fileUrl }, {
@@ -333,6 +341,24 @@ CachedFile.load = function(fileUrl) {
         }
       });
 
+    }
+    callback && callback(err);
+  });
+};
+
+CachedFile.ensure = function(fileUrl, callback) {
+  if (!callback) {
+    throw new Error('callback is required');
+  }
+
+  Tracker.autorun(function (c) {
+    var file = _filesInCache.findOne({ url: fileUrl });
+
+    if (!file || (!file.cached && !file.loading)) {
+      CachedFile.load(fileUrl);
+    } else if (file.cached) {
+      c.stop();
+      callback(file);
     }
   });
 };
