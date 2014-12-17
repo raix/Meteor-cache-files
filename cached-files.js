@@ -1,3 +1,5 @@
+/* global Tracker, CachedFile */
+
 // Create reactive entity
 var _ready = false;
 var _readyDeps = new Tracker.Dependency();
@@ -109,8 +111,7 @@ CachedFile.cachedFiles(function(err, entryList) {
           loading: false,
           nativeURL: fileEntry.nativeURL,
           internalUrl: fileEntry.toInternalURL(),
-          localUrl: fileEntry.toURL(),
-          fullPath: fullPath
+          localUrl: fileEntry.toURL()
         }
       });
 
@@ -251,7 +252,7 @@ CachedFile.checkQuotas = function(importantFileId) {
   });
 
   // Remove the exeeding files from cache...
-  _.each(filesToRemove, function(id, url) {
+  _.each(filesToRemove, function(id) {
     CachedFile.remove(id);
   });
 
@@ -261,12 +262,6 @@ CachedFile.checkQuotas = function(importantFileId) {
 CachedFile.add = function(fileUrl) {
   // Parse the name
   var nameParts = parseFile(fileUrl);
-  // Split up the url
-  var urlParts = fileUrl.split('/');
-  // Name is last part
-  var name = urlParts.pop();
-  // Get fileKey
-  var fileKey = name.split('.')[0];
 
   var id = Random.id();
 

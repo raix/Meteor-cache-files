@@ -1,6 +1,6 @@
 Package.describe({
   name: 'raix:cached-files',
-  version: "0.0.1",
+  version: "0.0.2",
   summary: "Cache files",
   git: "https://github.com/GroundMeteor/cached-files.git"
 });
@@ -10,52 +10,48 @@ Cordova.depends({
   "org.apache.cordova.file-transfer": "0.4.6"
 });
 
-Package.on_use(function (api) {
+Package.onUse(function (api) {
 
   api.export('CachedFile');
 
-  api.versionsFrom('METEOR@0.9.4');
-  if (api.versionsFrom) {
+  api.versionsFrom('METEOR@1.0');
 
-    api.use('meteor-platform', ['client', 'server']);
+  api.use([
+    'meteor-platform',
+    'meteor',
+    'underscore',
+    'ejson',
+    'mongo',
+    'ground:localstorage@0.0.2',
+    ], ['client', 'server']);
 
-    api.use([
-      'meteor',
-      'underscore',
-      'ejson',
-      'mongo',
-      'ground:localstorage@0.0.2',
-      ], ['client', 'server']);
+  api.use(['tracker'], 'client');
 
-    api.use(['tracker'], 'client');
-
-  }
-
-  api.add_files([
+  api.addFiles([
     'scope.js',
   ], 'client');
 
-  api.add_files([
+  api.addFiles([
     'browser.api.js',
   ], 'web.browser');
 
-  api.add_files([
+  api.addFiles([
     'cordova.api.js',
   ], 'web.cordova');
 
-  api.add_files([
+  api.addFiles([
     'local.collection.js',
     'cached-files.js',
   ], 'client');
 
 });
 
-Package.on_test(function (api) {
+Package.onTest(function (api) {
   api.use('raix:cached-files', ['client']);
 
   api.use('test-helpers', 'client');
   api.use(['tinytest', 'underscore', 'ejson']);
 
-  api.add_files('cached-files.tests.js', 'client');
+  api.addFiles('cached-files.tests.js', 'client');
 
 });
