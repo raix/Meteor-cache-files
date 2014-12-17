@@ -1,8 +1,8 @@
-function equals(a, b) {
-  return !!(JSON.stringify(a) === JSON.stringify(b));
-}
+//function equals(a, b) {
+//  return !!(JSON.stringify(a) === JSON.stringify(b));
+//}
 
-Tinytest.add('CachedFiles - test', function(test) {
+Tinytest.add('CachedFiles - test', function(/*test*/) {
 });
 
 

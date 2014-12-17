@@ -1,3 +1,5 @@
+/* global LocalCollection:true, Mongo */
+
 /*
 
   This file adds LocalCollection

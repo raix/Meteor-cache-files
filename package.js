@@ -1,3 +1,5 @@
+/* global Cordova */
+
 Package.describe({
   name: 'raix:cached-files',
   version: "0.0.2",

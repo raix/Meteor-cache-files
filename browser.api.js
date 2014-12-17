@@ -1,7 +1,7 @@
-console.log('Browser api');
+/* global CachedFile */
 
-CachedFile.cachedFiles = function(callback) {};
+CachedFile.cachedFiles = function(/*callback*/) {};
 
-CachedFile.getEntry = function(callback) {};
+CachedFile.getEntry = function(/*callback*/) {};
 
-CachedFile.downloadFile = function(id, url, callback) {};
+CachedFile.downloadFile = function(/*id, url, callback*/) {};

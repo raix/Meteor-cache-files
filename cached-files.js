@@ -364,7 +364,7 @@ CachedFile.remove = function(ref) {
   var file = _filesInCache.findOne({ $or: [ { _id: ref }, { url: ref } ] });
 
   // Remove the file in cache
-  CachedFile.removeFile(file.name, function(err) {
+  CachedFile.removeFile(file.name, function(/*err*/) {
     // Cached file removed
   });
 

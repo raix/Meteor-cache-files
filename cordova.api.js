@@ -1,3 +1,5 @@
+/* global CachedFile, cordova, FileTransfer */
+
 // CORDOVA ONLY
 
 // Folder Entry is our namespaced cache folder to work in
@@ -13,20 +15,25 @@ CachedFile.getEntry = function(callback) {
     var successCallback = function(cacheDirectory) {
       if (cacheDirectory.isDirectory) {
         // We got the directory - now get the namespace folder for this package
-        cacheDirectory.getDirectory('cachedFiles', { create: true, exclusive: false }, function(cacheFolder) {
+        cacheDirectory.getDirectory(
+          'cachedFiles',
+          { create: true, exclusive: false },
+          function(cacheFolder) {
 
-          if (cacheFolder.isDirectory) {
-            // Got the target folder entry
-            folderEntry = cacheFolder;
+            if (cacheFolder.isDirectory) {
+              // Got the target folder entry
+              folderEntry = cacheFolder;
 
-            // Callback
-            callback(null, folderEntry);
-          } else {
-            // Callback an error - we did expect this to be a directory
-            callback(new Error('Got namespace file instead of directory'));
-          }
+              // Callback
+              callback(null, folderEntry);
+            } else {
+              // Callback an error - we did expect this to be a directory
+              callback(new Error('Got namespace file instead of directory'));
+            }
 
-        }, callback);
+          },
+          callback
+        );
       } else {
         // Callback an error - we did expect this to be a directory
         callback(new Error('Got cached file instead of directory'));
